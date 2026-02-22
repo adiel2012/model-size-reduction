@@ -81,8 +81,8 @@ Model quantization has advanced rapidly, moving from simple rounding to complex 
 
 | Year | Algorithm | Key Innovation | Demo (Colab) |
 | :--- | :--- | :--- | :--- |
-| **2022** | **LLM.int8()** | Vector-wise quantization with outlier handling. | [Standard INT8](file:///d:/Adiel/model-quantization/gpt2_quantization.ipynb) |
-| **2023** | **GPTQ** | Optimal Brain Quantization; fast 4-bit standard. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/gptq_demo.ipynb) |
+| **2022** | **LLM.int8()** | Vector-wise quantization with outlier handling. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/llm_int8_demo.ipynb) |
+| **2023** | **GPTQ** | Optimal Brain Quantization; Hessian-based 4-bit standard. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/gptq_demo.ipynb) |
 | **2023** | **AWQ** | Activation-aware; protects "salient" weights. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/awq_demo.ipynb) |
 | **2023** | **NF4 (QLoRA)** | Information-theoretically optimal for normal weights. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/nf4_demo.ipynb) |
 | **2024** | **HQQ** | No calibration data needed; extremely fast solver. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/hqq_demo.ipynb) |
@@ -138,10 +138,10 @@ To truly understand which technique works best for your use case, we provide a u
 ---
 
 ## 🏁 Getting Started
-To see quantization in action, check out our hands-on demo:
-- **[GPT-2 Quantization Demo (Notebook)](file:///d:/Adiel/model-quantization/gpt2_quantization.ipynb)**: A direct comparison of `FP32` vs `INT8` on a real transformer model.
+To see quantization in action, check out our first hands-on milestone:
+- **[LLM.int8() Quantization Demo (Notebook)](file:///d:/Adiel/model-quantization/chronology/llm_int8_demo.ipynb)**: A from-scratch implementation of outlier-aware 8-bit quantization.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/gpt2_quantization.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/llm_int8_demo.ipynb)
 
 Or use popular industry libraries:
 - **PyTorch/TensorFlow**: Native quantization suites.
