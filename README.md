@@ -86,8 +86,8 @@ Model quantization has advanced rapidly, moving from simple rounding to complex 
 | **2023** | **AWQ** | Activation-aware; protects "salient" weights. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/awq_demo.ipynb) |
 | **2023** | **NF4 (QLoRA)** | Information-theoretically optimal for normal weights. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/nf4_demo.ipynb) |
 | **2024** | **HQQ** | No calibration data needed; extremely fast solver. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/hqq_demo.ipynb) |
-| **2025** | **BitNet 1.58b** | Ternary weights ({-1, 0, 1}); CPU-friendly additions. | *Coming Soon* |
-| **2026** | **T-Poti / Ultra-Low** | Massive shift toward 1-bit and 2-bit standard. | *Coming Soon* |
+| **2025** | **BitNet 1.58b** | Ternary weights ({-1, 0, 1}); CPU-friendly additions. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/bitnet_demo.ipynb) |
+| **2026** | **T-Poti / Ultra-Low** | Massive shift toward 1-bit and 2-bit standard. | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/chronology/tpoti_demo.ipynb) |
 
 ---
 
