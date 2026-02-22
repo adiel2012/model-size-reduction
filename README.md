@@ -131,7 +131,7 @@ To truly understand which technique works best for your use case, we provide a u
 - **Extensible**: Designed as a template for you to test your own new algorithms.
 
 ### Run Experiments
-- **[Unified Benchmarking Framework (Notebook)](file:///d:/Adiel/model-quantization/experiment_framework.ipynb)**: Compare all techniques on GPT-2.
+- **[Unified Benchmarking Framework (Notebook)](file:///d:/Adiel/model-quantization/experiment_framework.ipynb)**: Compare industry-standard TensorFlow built-in methods (TFLite PTQ, QAT).
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/experiment_framework.ipynb)
 
