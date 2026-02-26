@@ -91,6 +91,49 @@ Model quantization has advanced rapidly, moving from simple rounding to complex 
 
 ---
 
+## 🔬 Algorithm Comparison: Theory at a Glance
+
+The table below compares all covered algorithms across the dimensions that matter most when choosing a quantization strategy.
+
+| Algorithm | Year | Bits | Method | Calibration data | Scale granularity | Activation-aware | Approx. memory vs FP16 | Accuracy retention (0–100) | Key limitation |
+| :--- | :---: | :---: | :---: | :---: | :--- | :---: | :---: | :---: | :--- |
+| **LLM.int8()** | 2022 | 8 | PTQ | None | Vector-wise (per row/col) | ✅ (outlier split) | ~2× | 99 | Slower than FP16 on some GPUs |
+| **GPTQ** | 2023 | 4 | PTQ | Small (~128 samples) | Per-column (Hessian) | ✅ (via Hessian $H$) | ~4× | 99 | Slow to quantize; needs calibration |
+| **AWQ** | 2023 | 4 | PTQ | Small | Per-channel scale | ✅ (salient channels) | ~4× | 99 | Heuristic $\alpha$ grid search |
+| **NF4 (QLoRA)** | 2023 | 4 | PTQ | None | Per-block absmax | ❌ | ~4× | 98 | Assumes Gaussian weight distribution |
+| **HQQ** | 2024 | 4 | PTQ | None | Per-block (ALS) | ❌ | ~4× | 97 | No activation awareness |
+| **BitNet 1.58b** | 2025 | ~1.58 | QAT | N/A (train from scratch) | Per-tensor (absmean) | ✅ (INT8 activations) | ~10× | 95 | Requires training from scratch |
+| **T-Poti** | 2026 | 1–2 | PTQ | None | Per-tensor | ❌ | ~16–32× | 70 | Extreme accuracy loss without QAT |
+
+### Decision Guide
+
+```
+Need to quantize an existing model?
+ └─ 8-bit target → LLM.int8()
+ └─ 4-bit target, have calibration data?
+      ├─ Yes, want best accuracy → GPTQ
+      ├─ Yes, want hardware-friendly → AWQ
+      └─ No calibration available?
+           ├─ Weights are Gaussian → NF4 (QLoRA)
+           └─ Want fastest quantization → HQQ
+Building a model from scratch for edge?
+ └─ Power matters most → BitNet 1.58b (QAT)
+ └─ Absolute minimum size → T-Poti (1–2 bit)
+```
+
+### Key Theoretical Trade-offs
+
+| Trade-off | Winner |
+| :--- | :--- |
+| **Highest accuracy at 4-bit** | GPTQ ≈ AWQ > NF4 > HQQ |
+| **Fastest quantization** | HQQ > NF4 > AWQ > GPTQ |
+| **No calibration data needed** | NF4, HQQ, T-Poti |
+| **Most memory efficient** | T-Poti (1-bit) > BitNet (1.58-bit) > 4-bit methods |
+| **Best for edge / CPU** | BitNet 1.58b (addition-only arithmetic) |
+| **Best activation handling** | LLM.int8() (explicit outlier separation) |
+
+---
+
 ## 🎓 Knowledge Distillation
 
 While quantization shrinks the weights, **Knowledge Distillation (KD)** transfers intelligence from a massive model (the **Teacher**) to a compact one (the **Student**).
@@ -118,22 +161,6 @@ Quantization reduces bit-depth, Distillation transfers intelligence, and **Pruni
 - **[Model Pruning Demo (Notebook)](file:///d:/Adiel/model-quantization/pruning_demo.ipynb)**: Pruning GPT-2 by 30% and verifying performance.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/pruning_demo.ipynb)
-
----
-
-## 🧪 Experimentation Framework
-
-To truly understand which technique works best for your use case, we provide a unified **Experimentation Framework**. This modular notebook allows you to compare Quantization, Distillation, and Pruning side-by-side using the same hardware and performance metrics.
-
-### Framework Features
-- **Unified Benchmarking**: Measure Size, Latency, and Throughput consistently.
-- **Side-by-Side Plots**: Automatic generation of comparison charts.
-- **Extensible**: Designed as a template for you to test your own new algorithms.
-
-### Run Experiments
-- **[Unified Benchmarking Framework (Notebook)](file:///d:/Adiel/model-quantization/experiment_framework.ipynb)**: Compare industry-standard TensorFlow built-in methods (TFLite PTQ, QAT).
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adiel2012/model-size-reduction/blob/main/experiment_framework.ipynb)
 
 ---
 
